@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  </head>
+  <body>
+    <article class="loaf" id="app">
+
+      <button class="button" @click="onName" :class="{'active':name}">
+        <div class="name">{{name?name:'Who?'}}</div>
+      </button>
+      <button class="button" @click="onBehaviour" :class="{'active':behaviour}">
+        <div class="name">{{behaviour?behaviour:'What?'}}</div>
+      </button>
+
+      <button class="button clear" @click="onClear">
+        <div class="name">Clear</div>
+      </button>
+
+    </article>
+  </body>
+</html>
+
+<script>
+  var app = new Vue({
+    el: '#app',
+    data: {
+      name: '',
+      behaviour:'',
+      names: [
+        '同钊',
+        '小乔'
+      ],
+      behaviours: [
+        '是小狗',
+        '暴富'
+      ]
+    },
+    methods: {
+      onName(){
+        if(this.name){ return; }
+        const length = this.names.length - 1;
+        const index = Math.round(Math.random() * length);
+        this.name = this.names[index];
+      },
+      onBehaviour(){
+        if(this.behaviour){ return; }
+        const length = this.behaviours.length - 1;
+        const index = Math.round(Math.random() * length);
+        this.behaviour = this.behaviours[index];
+      },
+      onClear(){
+        this.name = undefined;
+        this.behaviour = undefined;
+      }
+    }
+  });
+</script>
+
+<style>
+  .loaf{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    bottom: 0;
+  }
+  
+  .button{
+    margin: 0 auto;
+    height: 50px;
+    width: 200px;
+    color: #222222;
+    border-radius: 20px;
+    background: #e8e8e8;
+    display: block;
+    border: none;
+    outline: none!important;
+    margin: 10px auto;
+  }
+
+  .button .name{
+    text-align: center;
+    font-size: 18px;
+    color: #222222;
+    font-weight: bold;
+    line-height: 20px;
+  }
+
+  .button.clear{
+    background: #ececec;
+  }
+
+  .button.clear .name{
+    color: #555555;
+  }
+
+  .button.active{
+    background: lightskyblue;
+  }
+</style>
